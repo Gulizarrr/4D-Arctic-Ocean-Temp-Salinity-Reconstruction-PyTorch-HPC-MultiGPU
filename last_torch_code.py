@@ -42,18 +42,18 @@ def print_gpu_info():
 class YourModel(nn.Module):
     def __init__(self, input_size, output_size):
         super(YourModel, self).__init__()
-        self.fc1 = nn.Linear(input_size, 64)  # 1. katman: Giriş boyutundan 64 nörona
-        self.fc2 = nn.Linear(64, 128)         # 2. katman: 64 nörondan 128 nörona
-        self.fc3 = nn.Linear(128, 256)        # 3. katman: 128 nörondan 256 nörona
-        self.fc4 = nn.Linear(256, 512)        # 4. katman: 256 nörondan 512 nörona
-        self.fc5 = nn.Linear(512, output_size) # 5. katman: 512 nörondan çıkış boyutuna
+        self.fc1 = nn.Linear(input_size, 64)  
+        self.fc2 = nn.Linear(64, 128)         
+        self.fc3 = nn.Linear(128, 256)        
+        self.fc4 = nn.Linear(256, 512)        
+        self.fc5 = nn.Linear(512, output_size) 
 
     def forward(self, x):
-        x = F.relu(self.fc1(x))  # 1. katman aktivasyonu: ReLU
-        x = F.relu(self.fc2(x))  # 2. katman aktivasyonu: ReLU
-        x = F.relu(self.fc3(x))  # 3. katman aktivasyonu: ReLU
-        x = F.relu(self.fc4(x))  # 4. katman aktivasyonu: ReLU
-        x = self.fc5(x)         # 5. katman
+        x = F.relu(self.fc1(x))  
+        x = F.relu(self.fc2(x))  
+        x = F.relu(self.fc3(x))  
+        x = F.relu(self.fc4(x))  
+        x = self.fc5(x)         
         return x
     
 class Trainer:
@@ -171,7 +171,7 @@ class Trainer:
         snapshot = {
             "MODEL_STATE": self.model.module.state_dict(),
             "EPOCHS_RUN": epoch,
-            "BEST_VAL_LOSS": self.best_val_loss,  # En iyi doğrulama kaybı
+            "BEST_VAL_LOSS": self.best_val_loss, 
             "PATIENCE_COUNTER": self.patience_counter
         }
         torch.save(snapshot, self.snapshot_path)
