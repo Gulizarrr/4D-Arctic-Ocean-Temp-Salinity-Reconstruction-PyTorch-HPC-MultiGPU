@@ -1,22 +1,25 @@
-# NEURAL NETWORK FOR ARCTIC CLIMATE DATA
+# 4D Arctic Ocean Temperature & Salinity Reconstruction
 
-To run this repository two options are available either using `Docker` or manually setting up the repository
-## Docker
-Execute to build and run the docker image (requires installation of Docker) `docker compose up`.
-Jupyter lab will be lauched and can be accessed on port 8888.
+This repository contains code and data for a **Neural Network-based 4D reconstruction** of Arctic Ocean temperature and salinity profiles.  
+**Note:** The code was developed and run on an HPC environment with multi-GPU support. Scripts may **not run directly** on local machines without modifications.
 
-## Manual
-1. Install Anaconda environment using
-`conda env create -f environment.yml`
-This will also install pip packages from `requirements.txt`.
-2. Activate environment using `conda activate env`
-3. Install PyTorch using
-`pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117`
-4. Download all the required data using. This requires `wget` ([wget](https://eternallybored.org/misc/wget/) for windows users).
-`./download_data.sh`
-5. Run jupyter lab
-`jupyter lab --ip=* --port=8888 --no-browser --notebook-dir=src --allow-root`
+## Repository Contents
 
-## Link to data
-The following is only necessary if the `download_data.sh` script does not work
-Download the data from [here](https://drive.google.com/drive/folders/1Qfv0EYKHhM5AfTFoUkNyMb4QjftiQdIY?usp=share_link) and put the files into the `data` folder.
+- `last_torch_code.py` : Main PyTorch training and inference script  
+- `profiles.pkl` : Sample temperature and salinity profiles  
+- `environment.yml` : Conda environment used for HPC  
+- `requirements.txt` : Python dependencies  
+- `src/` : Additional modules and scripts  
+- `Bash_Script_last_torch.txt` : Bash script used for running the training on HPC  
+- `README.md` : This file  
+
+## Usage Notes
+
+- The Bash script (`Bash_Script_last_torch.txt`) and multi-GPU training setup are specific to the HPC environment.  
+- Running `last_torch_code.py` locally may require modifying device settings (CPU/GPU) and paths.  
+
+
+## Link to Data
+
+Download the data from [here](https://drive.google.com/drive/folders/1Qfv0EYKHhM5AfTFoUkNyMb4QjftiQdIY?usp=share_link) and place the files in the `data` folder, if needed.
+

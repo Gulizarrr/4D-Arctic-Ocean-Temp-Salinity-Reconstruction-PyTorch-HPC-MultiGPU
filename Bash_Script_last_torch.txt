@@ -1,0 +1,55 @@
+Job <torch_single_node> was submitted from host <n-62-21-102> by user <guldur> in cluster <dcc> at Wed Sep 27 03:18:02 2023 Job was executed on host(s) <6*n-62-20-13>, in queue <gpuv100>, as user <guldur> in cluster <dcc> at Wed Sep 27 03:18:03 2023 </zhome/f9/0/201634> was used as the home directory.
+</zhome/f9/0/201634/code/NEURAL-NETWORK-FOR-ARCTIC-CLIMATE-DATA> was used as the working directory.
+Started at Wed Sep 27 03:18:03 2023
+Terminated at Wed Sep 27 05:10:09 2023
+Results reported at Wed Sep 27 05:10:09 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+### -- specify queue --
+#BSUB -q gpuv100
+### -- set the job Name --
+#BSUB -J torch_single_node
+### -- ask for number of cores (default: 1) -- #BSUB -n 6 ### -- specify that the cores MUST BE on a single host -- #BSUB -R "span[hosts=1]"
+### -- Select the resources: 1 gpu in exclusive process mode -- #BSUB -gpu "num=1:mode=exclusive_process"
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now #BSUB -W 24:00 # request 5GB of system-memory #BSUB -R "rusage[mem=40GB]"
+### -- set the email address --
+# please uncomment the following line and put in your e-mail address, # if you want to receive e-mail notifications on a non-default address ##BSUB -u guldur@dtu.dk ### -- send notification at start -- #BSUB -B ### -- send notification at completion-- #BSUB -N ### -- Specify the output and error file. %J is the job-id -- ### -- -o and -e mean append, -oo and -eo mean overwrite -- #BSUB -o torch_single_%J.out #BSUB -e torch_single_%J.err # -- end of LSF options --
+
+
+
+module load gcc/12.2.0-binutils-2.39
+nvidia-smi
+# Load the cuda module
+# module load cuda/11.7
+#/appl/cuda/11.7.0/samples/bin/x86_64/linux/release/deviceQuery
+source $HOME/miniconda3/etc/profile.d/conda.sh
+conda activate NNACD
+#python3 $HOME/code/NEURAL-NETWORK-FOR-ARCTIC-CLIMATE-DATA/last_torch_code.py
+
+# here call torchrun
+torchrun --standalone --nproc_per_node=1 torchrun_print3-1.py 500 --batch_size 64 50 --snapshot_path "snapshot.pt" --early_stopping_patience 5 
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   6599.44 sec.
+    Max Memory :                                 35721 MB
+    Average Memory :                             32425.26 MB
+    Total Requested Memory :                     245760.00 MB
+    Delta Memory :                               210039.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                19
+    Run time :                                   6726 sec.
+    Turnaround time :                            6727 sec.
+
+Read file <torch_single_17875141.out> for stdout output of this job.
+Read file <torch_single_17875141.err> for stderr output of this job.
